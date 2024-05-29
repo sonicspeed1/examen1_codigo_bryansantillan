@@ -1,0 +1,46 @@
+package usuario;
+
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.concurrent.atomic.AtomicInteger;
+
+import conexion.conexion;
+
+public class usuario {
+	 private static final AtomicInteger contador = new AtomicInteger(0);
+	 
+	 conexion con=new conexion();
+	 
+	    public static int obtenerSiguienteValor() {
+	        return contador.incrementAndGet();}
+	    
+	    public static void reiniciar() {
+	        contador.set(0); }
+	    
+	    public boolean insertar_usuario(String nombre,String
+	    		cedula,String correo,String Usuario,String contraseña) {
+	    	boolean d1=false;
+	    	 String sql = "INSERT INTO tb_usuario VALUES (?, ?, ?, ?, ?, ?,?)";
+	    	  try {
+				PreparedStatement pstmt = con.getConexion().prepareStatement(sql);
+				 pstmt.setString(1, nombre);
+				 pstmt.setString(2, cedula);
+				 pstmt.setString(3, correo);
+				 pstmt.setString(4, Usuario);
+				 pstmt.setString(5, contraseña);
+				 pstmt.setInt(6, obtenerSiguienteValor());
+				 pstmt.setInt(7,1);
+				 if(pstmt.executeUpdate()==1) {
+					 return d1=true;
+				 }
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return d1;
+	    	  
+		}
+	    
+	   
+	
+}

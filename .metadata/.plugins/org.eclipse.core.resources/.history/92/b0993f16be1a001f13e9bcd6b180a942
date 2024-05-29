@@ -1,0 +1,23 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Registro donadores</title>
+<link href="estilo.css" rel="stylesheet"/>
+</head>
+<body class="cuerpo">
+<div class="container">
+    <div class="cuadro2">
+<h2 class="cuadro3">Registro de donadores</h2>
+<label>Nombre: <input type="text" name="nombre"></label>
+<label>Cedula: <input type="text" name="ci"></label>
+<label>Correo: <input type="text" name="correo"></label>
+<label>Usuario: <input type="text" name="us"></label>
+<label>Contraseña: <input type="password" name="cont1"></label>
+<label>Verificar contraseña: <input type="password" name="cont2"></label>
+</div>
+</div>
+</body>
+</html>

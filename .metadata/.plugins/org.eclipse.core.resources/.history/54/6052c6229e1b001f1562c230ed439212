@@ -1,0 +1,188 @@
+package usuario;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+
+import conexion.conexion;
+
+public class usuario {
+	 
+	 private conexion con=new conexion();
+	 private String usuario,contraseña;
+	 private int id_user,id_perfil;
+	 
+	    public  int obtenerSiguienteValor() {
+	     int contador =1;
+	     String sql="select id_us from tb_usuario";
+	     ResultSet rs=con.Consulta(sql);
+	     try {
+			while(rs.next()) {
+				 if(rs.getInt(1)==contador) {
+					contador++;
+				 }
+			 }
+			rs.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	        		;
+					return contador;
+					}
+	    
+	    public  int obtenerSiguienteValor1() {
+		     int contador =1;
+		     String sql="select id_don from tb_don";
+		     ResultSet rs=con.Consulta(sql);
+		     try {
+				while(rs.next()) {
+					 if(rs.getInt(1)==contador) {
+						contador++;
+					 }
+				 }
+				rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		        		;
+						return contador;
+						}
+	    
+	    
+	    public boolean insertar_usuario(String nombre,String
+	    		cedula,String correo,String Usuario,String contraseña) {
+	    	boolean d1=false;
+	    	 String sql = "INSERT INTO tb_usuario VALUES (?, ?, ?, ?, ?, ?,?)";
+	    	  try {
+				PreparedStatement pstmt = con.getConexion().prepareStatement(sql);
+				 pstmt.setString(1, nombre);
+				 pstmt.setString(2, cedula);
+				 pstmt.setString(3, correo);
+				 pstmt.setString(4, Usuario);
+				 pstmt.setString(5, contraseña);
+				 pstmt.setInt(6, obtenerSiguienteValor());
+				 pstmt.setInt(7,1);
+				 if(pstmt.executeUpdate()==1) {
+					 return d1=true;
+				 }
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return d1;
+	    	  
+		}
+	    
+	   public boolean validar(String user,String pass) {
+		   boolean estado=false;
+		   String sql="Select * from tb_usuario where usuario='"+user+
+				   "' and contraseña='"+pass+"';";
+		   ResultSet rs=con.Consulta(sql);
+		   try {
+			if(rs.next()) {
+				estado=true;
+				  setUsuario(user);
+				  setContraseña(pass);
+				  setId_user(rs.getInt(6));
+				  setId_perfil(rs.getInt(7));
+			   }else {
+				   estado=false;
+				   rs.close();  
+			   }
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return estado;
+	   }
+
+     public String info_donacion(String nombre) {
+    	 String tabla="";
+    	String sql="select nombre,cedula,count(*) from tb_usuario,tb_don"
+    			+ "where id_us=donador and nombre='"+nombre
+    			+ "' group by nombre,cedula;";
+    	ResultSet rs=con.Consulta(sql);
+    	try {
+    		tabla+="<table><tr><th>NOMBRE</th><th>CEDULA</th><th>DONACION</th>"
+    				+ "</tr>";
+			while(rs.next()) {
+				tabla+="<tr>"+"<td>"+rs.getString(1)+"</td>"
+						+"<td>"+rs.getString(2)+"</td>"
+						+"<td>"+rs.getInt(3)+"</td>"
+						+"</tr>";
+			}
+			tabla+="</table>";
+			rs.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	return tabla;
+     }
+	   
+	public String getContraseña() {
+		return contraseña;
+	}
+
+
+	public void setContraseña(String contraseña) {
+		this.contraseña = contraseña;
+	}
+
+
+	public String getUsuario() {
+		return usuario;
+	}
+
+
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
+	}
+
+
+	public int getId_user() {
+		return id_user;
+	}
+
+
+	public void setId_user(int id_user) {
+		this.id_user = id_user;
+	}
+
+
+	public int getId_perfil() {
+		return id_perfil;
+	}
+
+
+	public void setId_perfil(int id_perfil) {
+		this.id_perfil = id_perfil;
+	}
+	
+	public boolean insertar_recurso(String beneficiario,String origen
+    		,String destino,String recurso,int id_user) {
+    	boolean d1=false;
+    	 String sql = "INSERT INTO tb_don VALUES (?, ?, ?, ?, ?, ?,?)";
+    	  try {
+			PreparedStatement don = con.getConexion().prepareStatement(sql);
+			don.setInt(1,obtenerSiguienteValor1());
+			don.setString(2, beneficiario);
+			don.setString(3, origen);
+			don.setString(4,destino);
+			don.setString(5, recurso);
+			don.setString(6,"espera");
+			don.setInt(7, id_user);
+			 if(don.executeUpdate()==1) {
+				 return d1=true;
+			 }
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return d1;
+    	  
+	}
+}

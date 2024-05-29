@@ -1,0 +1,34 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Donación</title>
+</head>
+<body class="cuerpo">
+<div class="cuadro">
+<h1 class="titulo">Ayuda Alimentaria</h1>
+</div>
+<nav>
+<ul class="menu">
+<li class="item"><a href="donacion.jsp">Donación</a></li>
+<li class="item"><a href="cerrar_sesion.jsp">Cerrar Sesión</a></li>
+</ul>
+</nav>
+<div class="container">
+    <div class="cuadro2">
+    <form action=donacion.jsp method="post">
+    <label class="item_reg">Beneficiario: <input type="text" name="nombre"></label>
+<label class="item_reg">Origen: <input type="text" name="ci"></label>
+<label class="item_reg">Destino: <input type="text" name="correo"></label>
+<label class="item_reg">Recurso: <input type="text" name="us"></label>
+ <div class="item_login">
+  <input value="Ingresar" name="ingresar" type="submit" class="button">  
+ <input value="Cancelar" name="cancelar" type="reset" class="button">
+ </div>
+ </form>
+ </div>
+</div>
+</body>
+</html>

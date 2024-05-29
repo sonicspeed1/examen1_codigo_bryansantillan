@@ -1,0 +1,27 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1" session="True" import="usuario.*"%>
+ <link href="estilo.css" rel="stylesheet"/>
+<%
+String usuario; 
+String mensaje="";
+ HttpSession sesion = request.getSession(); 
+    if (sesion.getAttribute("usuario") == null)   
+    { 
+    	mensaje="Ponga el usuario";
+    	response.sendRedirect("Login.jsp");
+    }else{
+    	 usuario=(String)sesion.getAttribute("usuario");
+    	  int perfil=(Integer)sesion.getAttribute("perfil"); 
+    	  pagina pag=new pagina();
+    	  %>
+    	  <body class="cuerpo">
+    	  <div class="cuadro">
+    	  <h1 class="titulo">Ayuda Alimentaria</h1>
+    	  <h2 class="titulo">Pagina privada</h1>
+    	  </div>
+    	  <body>
+    	  pag.mostrarpag(perfil);
+    	  <%
+    }
+ %>
+     

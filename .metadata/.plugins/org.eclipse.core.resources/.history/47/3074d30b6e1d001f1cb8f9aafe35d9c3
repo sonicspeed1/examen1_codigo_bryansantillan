@@ -1,0 +1,45 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" import="usuario.*"%>  
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Modificar</title>
+<link href="estilo.css" rel="stylesheet"/>
+</head>
+<body>
+
+<body class="cuerpo">
+<div class="cuadro">
+<h1 class="titulo">Ayuda Alimentaria</h1>
+</div>
+<div class="container">
+    <div class="cuadro2">
+    <form action=modificar.jsp method="post">
+<label class="item_reg">Beneficiario: <input type="text" name="be"></label>
+<label class="item_reg">Origen: <input type="text" name="or"></label>
+<label class="item_reg">Destino: <input type="text" name="des"></label>
+<label class="item_reg">Recurso: <input type="text" name="re"></label>
+ <select class="item_reg" name="se">
+            <option value="Entregado">Entregado</option>
+            <option value="Perdido">Perdido</option>
+            <option value="No Entregado">No Entregado</option>
+        </select>
+ <div class="item_login">
+  <input value="Actualizar" name="ingresar" type="submit" class="button">  
+ <input value="Borrar" name="cancelar" type="reset" class="button">
+ </div>
+</body>
+</html>
+<%
+usuario us=new usuario();
+int cod=Integer.parseInt(request.getParameter("cod"));
+String beneficiario=request.getParameter("be");
+String origen=request.getParameter("or");
+String destino=request.getParameter("des");
+String recurso=request.getParameter("re");
+String estado=request.getParameter("se");
+if(us.actualizar(cod, beneficiario, origen, destino, recurso, estado)){
+	response.sendRedirect("Lista_donadores.jsp");
+}
+%>

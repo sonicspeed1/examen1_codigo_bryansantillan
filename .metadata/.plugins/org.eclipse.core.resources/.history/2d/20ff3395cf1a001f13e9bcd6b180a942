@@ -1,0 +1,25 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" import="usuario.*"%>
+<% 
+usuario us= new usuario();
+String name=request.getparameter("nombre");
+String ci=request.getparameter("ci");
+String co=request.getparameter("correo");
+String user=request.getparameter("us");
+String pass=request.getparameter("cont1");
+String pass2=request.getparameter("cont2");
+String mensaje = ""; 
+if (pass.equals(pass2)) {
+    if (us.insertar_usuario(name, ci, co, user, pass)) {
+        mensaje = "Usuario registrado correctamente.";
+    } else {
+        mensaje = "Error al registrar el usuario.";
+    }
+} else {
+    mensaje = "Las contraseñas no coinciden.";
+}
+
+session.setAttribute("mensaje", mensaje);
+%>
+}
+%>

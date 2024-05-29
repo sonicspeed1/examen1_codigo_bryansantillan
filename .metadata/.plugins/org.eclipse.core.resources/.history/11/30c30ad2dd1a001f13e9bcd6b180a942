@@ -1,0 +1,21 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<link href="estilo.css" rel="stylesheet"/>
+<title>Ayuda Alimentaria</title>
+</head>
+<body class="cuerpo">
+<div class="cuadro">
+<h1 class="titulo">Ayuda Alimentaria</h1>
+</div>
+<nav>
+<ul class="menu">
+<li class="item"><a href="informacion.jsp">Información</a></li>
+<li class="item"><a href="Login.jsp">Login</a></li>
+</ul>
+</nav>
+</body>
+</html>

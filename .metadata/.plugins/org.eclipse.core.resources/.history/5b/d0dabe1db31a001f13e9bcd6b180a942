@@ -1,0 +1,20 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Login</title>
+<link href="estilo.css" rel="stylesheet"/>
+</head>
+<body class="cuerpo">
+<div class="cuadro">
+<h1 class="titulo">Ayuda Alimentaria</h1>
+</div>
+<div class="container">
+    <div class="cuadro2">
+ <h2>Login</h2>      
+    </div>
+</div>
+</body>
+</html>

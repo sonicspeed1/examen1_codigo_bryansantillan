@@ -1,0 +1,60 @@
+package usuario;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+
+import conexion.conexion;
+
+public class usuario {
+	
+	 
+	 conexion con=new conexion();
+	 
+	    public  int obtenerSiguienteValor() {
+	     int contador =1;
+	     String sql="select id_us from tb_usuario";
+	     ResultSet rs=con.Consulta(sql);
+	     try {
+			if(rs.next()) {
+				 while(rs.getInt(1)==contador) {
+					contador++;
+				 }
+			 }
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	        		;
+					return contador;
+					}
+	    
+	    
+	    public boolean insertar_usuario(String nombre,String
+	    		cedula,String correo,String Usuario,String contraseña) {
+	    	boolean d1=false;
+	    	 String sql = "INSERT INTO tb_usuario VALUES (?, ?, ?, ?, ?, ?,?)";
+	    	  try {
+				PreparedStatement pstmt = con.getConexion().prepareStatement(sql);
+				 pstmt.setString(1, nombre);
+				 pstmt.setString(2, cedula);
+				 pstmt.setString(3, correo);
+				 pstmt.setString(4, Usuario);
+				 pstmt.setString(5, contraseña);
+				 pstmt.setInt(6, obtenerSiguienteValor());
+				 pstmt.setInt(7,1);
+				 if(pstmt.executeUpdate()==1) {
+					 return d1=true;
+				 }
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return d1;
+	    	  
+		}
+	    
+	   
+	
+}

@@ -1,0 +1,27 @@
+package usuario;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import conexion.conexion;
+
+public class pagina {
+	private conexion con=new conexion();
+	public String mostrarpag(int pag) {
+		String menu="";
+		String sql="SELECT * FROM tb_perfil,tb_perpag,tb_pag where pag=id_pag and perfil=id_per and perfil="+pag;
+		 ResultSet rs=con.Consulta(sql);
+		 try {
+			while(rs.next()) {
+				menu = "<a style='margin-bottom:20; border: 1px solid black;"
+						+ "background: lightgreen;' href=\"" 
+			+ rs.getString(8) + "\" accesskey=\"" + rs.getInt(1) + "\">" + rs.getString(2) + "</a>";
+			 }
+			 rs.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 return menu;
+	}
+}

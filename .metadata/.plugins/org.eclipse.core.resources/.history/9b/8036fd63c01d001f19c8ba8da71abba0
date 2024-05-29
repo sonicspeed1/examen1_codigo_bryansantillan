@@ -1,0 +1,25 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Informacion</title>
+<link href="estilo.css" rel="stylesheet"/>
+</head>
+<body class="cuerpo">
+<div class="cuadro">
+<h1 class="titulo">Ayuda Alimentaria</h1>
+</div>
+<nav>
+<ul class="menu">
+<li class="item"><a href="informacion.jsp">Información</a></li>
+<li class="item"><a href="Login.jsp">Login</a></li>
+</ul>
+<div>
+<img src="media/desnutrición.jpg">
+</div>
+<footer class="footer"> Contactos con nosotros: telf: 3821-660 cel:098234334</footer>
+</nav>
+</body>
+</html>

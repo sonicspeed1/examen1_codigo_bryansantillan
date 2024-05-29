@@ -1,0 +1,58 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" import="usuario.*"%>
+ <%
+    String mensaje = (String) session.getAttribute("mensaje");
+    session.removeAttribute("mensaje");
+%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Donación</title>
+<link href="estilo.css" rel="stylesheet"/>
+</head>
+<body class="cuerpo">
+<div class="cuadro">
+<h1 class="titulo">Ayuda Alimentaria</h1>
+</div>
+<nav>
+<ul class="menu">
+<li class="item"><a href="donacion.jsp">Donación</a></li>
+<li class="item"><a href="cerrar_sesion.jsp">Cerrar Sesión</a></li>
+</ul>
+</nav>
+<div class="container">
+    <div class="cuadro2">
+     <h2 class="titulo2">Donación</h2><hr> 
+    <form action=donacion.jsp method="post">
+    <label class="item_reg">Beneficiario: <input type="text" name="be"></label>
+<label class="item_reg">Origen: <input type="text" name="or"></label>
+<label class="item_reg">Destino: <input type="text" name="ds"></label>
+<label class="item_reg">Recurso: <input type="text" name="re"></label>
+ <div class="item_login">
+  <input value="Ingresar" name="ingresar" type="submit" class="button">  
+ <input value="Cancelar" name="cancelar" type="reset" class="button">
+ </div>
+   <% if (mensaje != null && !mensaje.isEmpty()) { %>
+        <p><%= mensaje %></p>
+    <% } %>
+ </form>
+ </div>
+</div>
+</body>
+</html>
+<% 
+usuario us=new usuario();
+String be=request.getParameter("be");
+String or=request.getParameter("or");
+String ds=request.getParameter("ds");
+String re=request.getParameter("re");
+String mensaje="";
+HttpSession sesion = request.getSession(); 
+int user1=(Integer)sesion.getAttribute("id_us"); 
+if(us.insertar_recurso(be, or, ds, re, user1)){
+	mensaje="recurso insertado,habla con nuestros supervisores para la donacion";
+}else{
+	mensaje="datos incorrectos";
+}
+%>
